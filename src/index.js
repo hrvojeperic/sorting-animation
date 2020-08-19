@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import SortingAnimation from './Components/SortingAnimation';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SortingAnimation />
   </React.StrictMode>,
   document.getElementById('root')
 );
