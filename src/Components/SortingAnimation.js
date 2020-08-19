@@ -1,30 +1,53 @@
 import React, { Component } from 'react';
 import '../Styles/SortingAnimationStyles.css';
 import MenuBarComponent from './MenuBarComponent.js';
-import AnimateBubbleSort from '../Utilities/BubbleSortUtility.js';
-import AnimateInsertionSort from '../Utilities/InsertionSortUtility.js';
-import AnimateMergeSort from '../Utilities/MergeSortUtility.js';
+import BubbleSortUtility from '../Utilities/BubbleSortUtility.js';
+import InsertionSortUtility from '../Utilities/InsertionSortUtility.js';
+import MergeSortUtility from '../Utilities/MergeSortUtility.js';
+import NewArrayUtility from '../Utilities/NewArrayUtility.js';
+
 
 class SortingAnimation extends Component {
-/*
+
     constructor(props) {
         super(props);
     }
 
     state = {
-        animateArray = []
+        animationArray: [],
+        arraySize: 200,
+        minElementSize: 10,
+        maxElementSize: 500
     }
-*/
+
+    // initiate new array
+    newArrayHandler = () => {
+        let newArr = NewArrayUtility(this.state.arraySize, this.state.minElementSize, this.state.maxElementSize);
+        this.setState({animationArray: newArr}, () => {
+            console.log(this.state.animationArray);
+        });
+    }
+
     render() {
+
+        // display list of boxes
+        const boxList = this.state.animationArray.map((e, index) => {
+            const boxHeight = e + 'px';
+            return <div className='block' key={index} style={{height: boxHeight}}/>;
+        });
+
         return (
             <div>
-
+                
                 <MenuBarComponent 
-                    bubble={() => AnimateBubbleSort()}
-                    insertion={() => AnimateInsertionSort()}
-                    merge={() => AnimateMergeSort()}/>     
-                <div className="App-header">
-                    <p>My name is Joey</p>
+                    new={() => this.newArrayHandler()}
+                    bubble={() => BubbleSortUtility()}
+                    insertion={() => InsertionSortUtility()}
+                    merge={() => MergeSortUtility()}/>     
+                
+                
+                <div className='container'>
+                    {boxList}
                 </div>
 
             </div>

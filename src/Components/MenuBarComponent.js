@@ -5,6 +5,7 @@ const MenuBarComponent = (props) => {
 
     return (
         <div className='Menu'>
+            <button onClick={props.new}>New Array</button>
             <button onClick={props.bubble}>Bubble Sort</button>
             <button onClick={props.insertion}>Insertion Sort</button>
             <button onClick={props.merge}>Merge Sort</button>

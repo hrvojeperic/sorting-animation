@@ -1,7 +1,7 @@
 
-const AnimateInsertionSort = () => {
+const InsertionSortUtility = () => {
     console.log("Animating Insertion Sort...");
     return null;
 }
 
-export default AnimateInsertionSort;
+export default InsertionSortUtility;
