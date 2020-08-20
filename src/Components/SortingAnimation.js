@@ -6,27 +6,34 @@ import InsertionSortUtility from '../Utilities/InsertionSortUtility.js';
 import MergeSortUtility from '../Utilities/MergeSortUtility.js';
 import NewArrayUtility from '../Utilities/NewArrayUtility.js';
 
-
 class SortingAnimation extends Component {
-
+    
     constructor(props) {
         super(props);
     }
 
     state = {
         animationArray: [],
-        arraySize: 200,
+        arraySize: 100,
         minElementSize: 10,
-        maxElementSize: 500
+        maxElementSize: 500,
     }
 
     // initiate new array
     newArrayHandler = () => {
+        this.setState({animationArray: []});
         let newArr = NewArrayUtility(this.state.arraySize, this.state.minElementSize, this.state.maxElementSize);
         this.setState({animationArray: newArr}, () => {
-            console.log(this.state.animationArray);
+            console.log("DONE NEW");
         });
     }
+
+    bubbleSortHandler = () => {
+
+        BubbleSortUtility(this.state.animationArray);
+        console.log("DONE!!!!");
+    }
+    
 
     render() {
 
@@ -41,9 +48,9 @@ class SortingAnimation extends Component {
                 
                 <MenuBarComponent 
                     new={() => this.newArrayHandler()}
-                    bubble={() => BubbleSortUtility()}
+                    bubble={() => this.bubbleSortHandler()}
                     insertion={() => InsertionSortUtility()}
-                    merge={() => MergeSortUtility()}/>     
+                    merge={() => MergeSortUtility()} />     
                 
                 
                 <div className='container'>

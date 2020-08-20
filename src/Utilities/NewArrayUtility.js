@@ -4,7 +4,7 @@ const NewArrayUtility = (size, min, max) => {
     for(let i = 0; i < size; i++) {
         newArray[i] = Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    console.log("Creating New Array..." + newArray[0]);
+    console.log("Creating New Array...");
     return newArray;
 }
 
