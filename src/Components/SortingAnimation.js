@@ -5,6 +5,7 @@ import BubbleSortUtility from '../Utilities/BubbleSortUtility.js';
 import InsertionSortUtility from '../Utilities/InsertionSortUtility.js';
 import MergeSortUtility from '../Utilities/MergeSortUtility.js';
 import NewArrayUtility from '../Utilities/NewArrayUtility.js';
+import { v4 as uuidv4 } from 'uuid'; // fixed hard bug
 
 class SortingAnimation extends Component {
     
@@ -14,22 +15,27 @@ class SortingAnimation extends Component {
 
     state = {
         animationArray: [],
-        arraySize: 100,
+        arraySize: 200,
         minElementSize: 10,
         maxElementSize: 500,
     }
 
     // initiate new array
     newArrayHandler = () => {
-        this.setState({animationArray: []});
+        
         let newArr = NewArrayUtility(this.state.arraySize, this.state.minElementSize, this.state.maxElementSize);
-        this.setState({animationArray: newArr}, () => {
+        
+        
+        this.setState({animationArray: [...newArr]}, () => {
             console.log("DONE NEW");
         });
     }
 
     bubbleSortHandler = () => {
-
+        let blockArray = document.getElementsByClassName('block');
+        for(let i = 0; i < blockArray.length; i++) {
+            console.log(blockArray[i].style.height);
+        }
         BubbleSortUtility(this.state.animationArray);
         console.log("DONE!!!!");
     }
@@ -40,8 +46,8 @@ class SortingAnimation extends Component {
         // display list of boxes
         const boxList = this.state.animationArray.map((e, index) => {
             const boxHeight = e + 'px';
-            return <div className='block' key={index} style={{height: boxHeight}}/>;
-        });
+            return <div className='block' key={uuidv4()} style={{height: boxHeight}}/>;
+        }); 
 
         return (
             <div>

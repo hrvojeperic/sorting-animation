@@ -5,8 +5,9 @@ const BubbleSortUtility = (stateArray) => {
     BubbleSortAnimation(animateArr);
 
     let blockArray = document.getElementsByClassName('block');
+    
     for(let i = 0; i < blockArray.length; i++) {
-        //console.log(blockArray[i].style.height);
+        console.log(blockArray[i].style.height);
     }
 
     //console.log("Animating Bubble Sort...");
@@ -15,6 +16,7 @@ const BubbleSortUtility = (stateArray) => {
 
 const BubbleSortAnimation = (animateArr) => {
     const ANIMATION_SPEED_MS = 0;
+    //let blockArray = document.getElementsByClassName('block');
     for (let i = 0; i < animateArr.length; i++) {
         
         //(function(index) {
@@ -51,6 +53,7 @@ const BubbleSortAnimation = (animateArr) => {
 
 // performs bubble sort on array
 const BubbleSortAlgorithm = (arr) => {
+    console.log(arr);
     let animations = [];
     for (let i = 0; i < arr.length - 1; i++) {
         for (let j = 0; j < arr.length - i - 1; j++) {
@@ -64,7 +67,7 @@ const BubbleSortAlgorithm = (arr) => {
             animations.push([j, j+1, false, false]) // un-highlight animation
         }
     }
-   // console.log(arr);
+    console.log(arr);
     return animations;
 } 
 
