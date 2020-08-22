@@ -8,36 +8,39 @@ import NewArrayUtility from '../Utilities/NewArrayUtility.js';
 import { v4 as uuidv4 } from 'uuid'; // fixed hard bug
 
 class SortingAnimation extends Component {
-    
-    constructor(props) {
-        super(props);
-    }
 
     state = {
         animationArray: [],
-        arraySize: 200,
+        arraySize: 225,
         minElementSize: 10,
         maxElementSize: 500,
+        animationSpeed: 0.5
     }
 
     // initiate new array
     newArrayHandler = () => {
-        
         let newArr = NewArrayUtility(this.state.arraySize, this.state.minElementSize, this.state.maxElementSize);
+        this.setState({animationArray: newArr});
+        /*this.setState({animationArray: [{id: uuidv4(), value: 500}, 
+                                        {id: uuidv4(), value: 400},
+                                        {id: uuidv4(), value: 300}, 
+                                        {id: uuidv4(), value: 200}, 
+                                        {id: uuidv4(), value: 100}]}, () => {
+            console.log(this.state.animationArray);
+            console.log(this.state.animationArray.length);
+            console.log(this.state.animationArray[0].value);
+        });*/
         
-        
-        this.setState({animationArray: [...newArr]}, () => {
-            console.log("DONE NEW");
-        });
     }
 
+    // initiate bubble sort
     bubbleSortHandler = () => {
-        let blockArray = document.getElementsByClassName('block');
-        for(let i = 0; i < blockArray.length; i++) {
-            console.log(blockArray[i].style.height);
-        }
-        BubbleSortUtility(this.state.animationArray);
-        console.log("DONE!!!!");
+        BubbleSortUtility(this.state.animationArray, this.state.animationSpeed);
+    }
+
+    // initiate insertion sort
+    insertionSortHandler = () => {
+        InsertionSortUtility(this.state.animationArray, this.state.animationSpeed);
     }
     
 
@@ -45,9 +48,9 @@ class SortingAnimation extends Component {
 
         // display list of boxes
         const boxList = this.state.animationArray.map((e, index) => {
-            const boxHeight = e + 'px';
-            return <div className='block' key={uuidv4()} style={{height: boxHeight}}/>;
-        }); 
+            const boxHeight = e.value + 'px';
+            return <div className='block' key={e.id} style={{height: boxHeight}}/>;
+        });
 
         return (
             <div>
@@ -55,7 +58,7 @@ class SortingAnimation extends Component {
                 <MenuBarComponent 
                     new={() => this.newArrayHandler()}
                     bubble={() => this.bubbleSortHandler()}
-                    insertion={() => InsertionSortUtility()}
+                    insertion={() => this.insertionSortHandler()}
                     merge={() => MergeSortUtility()} />     
                 
                 

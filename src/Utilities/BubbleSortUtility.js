@@ -1,74 +1,61 @@
-
-const BubbleSortUtility = (stateArray) => {
-    let copyArr = [...stateArray];
+// initiates bubble sort methods
+const BubbleSortUtility = (stateArray, speed) => {
+    let copyArr = JSON.parse(JSON.stringify(stateArray));
     let animateArr = BubbleSortAlgorithm(copyArr);
-    BubbleSortAnimation(animateArr);
+    BubbleSortAnimation(animateArr, speed);
+} 
 
-    let blockArray = document.getElementsByClassName('block');
-    
-    for(let i = 0; i < blockArray.length; i++) {
-        console.log(blockArray[i].style.height);
+// performs bubble sort on array
+const BubbleSortAlgorithm = (arr) => {
+    let length = arr.length;
+    let animations = [];
+    for (let i = 0; i < length - 1; i++) {
+        for (let j = 0; j < length - i - 1; j++) {
+            animations.push([j, j+1, true, false]) // highlight animation
+            if (arr[j].value > arr[j+1].value) {
+                let temp = arr[j].value;
+                arr[j].value = arr[j+1].value;
+                arr[j+1].value = temp;
+                animations.push([j, j+1, true, true]) // swap animation
+            }
+            animations.push([j, j+1, false, false]) // un-highlight animation
+        }
     }
-
-    //console.log("Animating Bubble Sort...");
-    return null;
+    return animations;
 }
 
-const BubbleSortAnimation = (animateArr) => {
-    const ANIMATION_SPEED_MS = 0;
-    //let blockArray = document.getElementsByClassName('block');
+// performs bubble sort animation
+const BubbleSortAnimation = (animateArr, speed) => {
     for (let i = 0; i < animateArr.length; i++) {
-        
-        //(function(index) {
-        //    setTimeout(function() {
+        (function(index) {
+            setTimeout(function() {
                 let blockArray = document.getElementsByClassName('block');
                 let [curr, next, isCompare, isSwap] = animateArr[i];
                 if (isCompare === true && isSwap === false) { // highlight animation
-        //            setTimeout(function() {
+                    setTimeout(function() {
                         blockArray[curr].style.backgroundColor = 'red';
                         blockArray[next].style.backgroundColor = 'red';
-        //            }, index * ANIMATION_SPEED_MS);
+                    }, index * speed);
                 }
                 else if (isCompare === false && isSwap === false) { // un-highlight animation
-        //            setTimeout(function() {
+                    setTimeout(function() {
                         blockArray[curr].style.backgroundColor = '#282c34';
                         blockArray[next].style.backgroundColor = '#282c34';
-        //            }, index * ANIMATION_SPEED_MS);
+                    }, index * speed);
                 }
                 else if (isCompare === true && isSwap === true) { // swap animation
-        //            setTimeout(function() {
+                    setTimeout(function() {
                         let currHeight = blockArray[next].style.height;
                         let nextHeight = blockArray[curr].style.height;
                         blockArray[curr].style.height = currHeight;
                         blockArray[next].style.height = nextHeight;
                         blockArray[curr].style.height = currHeight+'px';
                         blockArray[next].style.height = nextHeight+'px';
-         //           }, index * ANIMATION_SPEED_MS);
+                    }, index * speed);
                 }
-
-       //     }, index * ANIMATION_SPEED_MS);
-     //   })(i)
+            }, (index) * speed);
+        })(i)
     }
 }
-
-// performs bubble sort on array
-const BubbleSortAlgorithm = (arr) => {
-    console.log(arr);
-    let animations = [];
-    for (let i = 0; i < arr.length - 1; i++) {
-        for (let j = 0; j < arr.length - i - 1; j++) {
-            animations.push([j, j+1, true, false]) // highlight animation
-            if (arr[j] > arr[j+1]) {
-                let temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
-                animations.push([j, j+1, true, true]) // swap animation
-            }
-            animations.push([j, j+1, false, false]) // un-highlight animation
-        }
-    }
-    console.log(arr);
-    return animations;
-} 
 
 export default BubbleSortUtility;
