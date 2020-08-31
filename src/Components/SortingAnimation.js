@@ -11,7 +11,7 @@ class SortingAnimation extends Component {
 
     state = {
         animationArray: [],
-        arraySize: 225,
+        arraySize: 3,
         minElementSize: 10,
         maxElementSize: 500,
         animationSpeed: 0.5
@@ -30,7 +30,6 @@ class SortingAnimation extends Component {
             console.log(this.state.animationArray.length);
             console.log(this.state.animationArray[0].value);
         });*/
-        
     }
 
     // initiate bubble sort
@@ -42,35 +41,31 @@ class SortingAnimation extends Component {
     insertionSortHandler = () => {
         InsertionSortUtility(this.state.animationArray, this.state.animationSpeed);
     }
+
+    // initiate merge sort
+    mergeSortHandler = () => {
+        MergeSortUtility(this.state.animationArray, this.state.animationSpeed);
+    }
     
-
     render() {
-
         // display list of boxes
         const boxList = this.state.animationArray.map((e, index) => {
             const boxHeight = e.value + 'px';
             return <div className='block' key={e.id} style={{height: boxHeight}}/>;
         });
-
         return (
             <div>
-                
                 <MenuBarComponent 
                     new={() => this.newArrayHandler()}
                     bubble={() => this.bubbleSortHandler()}
                     insertion={() => this.insertionSortHandler()}
-                    merge={() => MergeSortUtility()} />     
-                
-                
+                    merge={() => this.mergeSortHandler()} />     
                 <div className='container'>
                     {boxList}
                 </div>
-
             </div>
         );
     }
-
 }
-
 
 export default SortingAnimation;
