@@ -31,12 +31,17 @@ const merge = ( A,  temp,  from,  mid,  to, N, animations) =>
     animations.push([i, j, false, false]); // un-highlight animation
 
 		if (A[i].value < A[j].value) {
-      animations.push([k, i, true, true]); // swap animation
+      animations.push([k, A[i].value, true, true]); // swap animation
       console.log("k: ", k, " i: ", i);
+      console.log(JSON.parse(JSON.stringify(temp)));
+      console.log(JSON.parse(JSON.stringify(A)));
       temp[k++].value = A[i++].value;
     }
 		else {
-      animations.push([k, j, true, true]); // swap animation
+      animations.push([k, A[j].value, true, true]); // swap animation
+      console.log("k: ", k, " j: ", j);
+      console.log(JSON.parse(JSON.stringify(temp)));
+      console.log(JSON.parse(JSON.stringify(A)));
       temp[k++].value = A[j++].value; 
     }
 	}
@@ -45,7 +50,7 @@ const merge = ( A,  temp,  from,  mid,  to, N, animations) =>
 	while (i < N && i <= mid) {
     animations.push([i, i, true, false]); // highlight animation
     animations.push([i, i, false, false]); // un-highlight animation
-    animations.push([k, i, true, true]); // swap animation
+    animations.push([k, A[i].value, true, true]); // swap animation
     temp[k++].value = A[i++].value;
   }
 
@@ -102,20 +107,20 @@ const MergeSortAnimation = (animateArr, speed) => {
                 }
                 else if (isCompare === true && isSwap === true) { // swap animation
                   setTimeout(function() {
-                      let currHeight = blockArray[next].style.height;
+                      /*let currHeight = blockArray[next].style.height;
                       let nextHeight = blockArray[curr].style.height;
                       blockArray[curr].style.height = currHeight;
                       blockArray[next].style.height = nextHeight;
                       blockArray[curr].style.height = currHeight+'px';
                       blockArray[next].style.height = nextHeight+'px';
-                      /*
+                      */
                       //let currHeight = blockArray[next].style.height;
                       let nextHeight = blockArray[curr].style.height;
                       blockArray[curr].style.height = next;
                       //blockArray[next].style.height = nextHeight;
                       blockArray[curr].style.height = next+'px';
                       //blockArray[next].style.height = nextHeight+'px';
-                      */
+                      
 
                   }, index * speed);
                 }

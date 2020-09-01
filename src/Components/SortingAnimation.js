@@ -11,10 +11,10 @@ class SortingAnimation extends Component {
 
     state = {
         animationArray: [],
-        arraySize: 10,
+        arraySize: 100,
         minElementSize: 10,
         maxElementSize: 500,
-        animationSpeed: 200
+        animationSpeed: 2
     }
 
     // initiate new array
