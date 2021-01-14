@@ -1,8 +1,10 @@
+let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 // initiates bubble sort methods
-const SelectionSortUtility = (stateArray, speed) => {
+const SelectionSortUtility = async (stateArray, speed) => {
     let copyArr = JSON.parse(JSON.stringify(stateArray));
     let animateArr = SelectionSortAlgorithm(copyArr);
-    SelectionSortAnimation(animateArr, speed);
+    await SelectionSortAnimation(animateArr, speed);
 }
 
 const sort = (arr, animations) => { 
@@ -45,7 +47,7 @@ const SelectionSortAlgorithm = (arr) => {
 }
 
 // performs bubble sort animation
-const SelectionSortAnimation = (animateArr, speed) => {
+const SelectionSortAnimation = async (animateArr, speed) => {
     for (let i = 0; i < animateArr.length; i++) {
         (function(index) {
             setTimeout(function() {
@@ -76,6 +78,7 @@ const SelectionSortAnimation = (animateArr, speed) => {
             }, (index) * speed);
         })(i)
     }
+    await wait(animateArr.length * speed * 2);
 }
 
 export default SelectionSortUtility;

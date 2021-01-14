@@ -1,8 +1,10 @@
+let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 // initiates insertion sort methods
-const InsertionSortUtility = (stateArray, speed) => {
+const InsertionSortUtility = async (stateArray, speed) => {
     let copyArr = JSON.parse(JSON.stringify(stateArray));
     let animateArr = InsertionSortAlgorithm(copyArr);
-    InsertionSortAnimation(animateArr, speed);
+    await InsertionSortAnimation(animateArr, speed);
 }
 
 // performs insertion sort on array
@@ -31,7 +33,7 @@ const InsertionSortAlgorithm = (arr) => {
 }
 
 // performs insertion sort animation
-const InsertionSortAnimation = (animateArr, speed) => {
+const InsertionSortAnimation = async (animateArr, speed) => {
     for (let i = 0; i < animateArr.length; i++) {
         console.log(animateArr[i]);
         (function(index) {
@@ -63,6 +65,7 @@ const InsertionSortAnimation = (animateArr, speed) => {
             }, (index) * speed);
         })(i)
     }
+    await wait(animateArr.length * speed * 2);
 }
 
 export default InsertionSortUtility;

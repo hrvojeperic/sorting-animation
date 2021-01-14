@@ -4,7 +4,7 @@ let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 const BubbleSortUtility = async (stateArray, speed) => {
     let copyArr = JSON.parse(JSON.stringify(stateArray));
     let animateArr = BubbleSortAlgorithm(copyArr);
-    const temp = await BubbleSortAnimation(animateArr, speed);
+    await BubbleSortAnimation(animateArr, speed);
 }
 
 // performs bubble sort on array
@@ -28,7 +28,6 @@ const BubbleSortAlgorithm = (arr) => {
 
 // performs bubble sort animation
 const BubbleSortAnimation = async (animateArr, speed) => {
-    let acc = 0; 
         
     for (let i = 0; i < animateArr.length; i++) {
         
@@ -40,14 +39,14 @@ const BubbleSortAnimation = async (animateArr, speed) => {
                     setTimeout(function() {
                         blockArray[curr].style.backgroundColor = 'red';
                         blockArray[next].style.backgroundColor = 'red';
-                        acc = index*speed;
+                        
                     }, index * speed);
                 }
                 else if (isCompare === false && isSwap === false) { // un-highlight animation
                     setTimeout(function() {
                         blockArray[curr].style.backgroundColor = '#282c34';
                         blockArray[next].style.backgroundColor = '#282c34';
-                        acc = index*speed;
+                        
                     }, index * speed);
                 }
                 else if (isCompare === true && isSwap === true) { // swap animation
@@ -58,15 +57,14 @@ const BubbleSortAnimation = async (animateArr, speed) => {
                         blockArray[next].style.height = nextHeight;
                         blockArray[curr].style.height = currHeight+'px';
                         blockArray[next].style.height = nextHeight+'px';
-                        acc = index*speed;
+                       
                     }, index * speed);
                 }
-                acc = index*speed;
+                
             }, (index) * speed);
         })(i)
     }
     await wait(animateArr.length * speed * 2);
-    return 1;
 }
 
 export default BubbleSortUtility;

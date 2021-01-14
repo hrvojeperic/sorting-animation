@@ -1,8 +1,10 @@
+let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 // initiates merge sort methods
-const MergeSortUtility = (stateArray, speed) => {
+const MergeSortUtility = async (stateArray, speed) => {
     let copyArr = JSON.parse(JSON.stringify(stateArray));
     let animateArr = MergeSortAlgorithm(copyArr);
-    MergeSortAnimation(animateArr, speed);
+    await MergeSortAnimation(animateArr, speed);
 }
 
 // performs merge sort on array
@@ -86,7 +88,7 @@ const mergesort = ( A,  temp,  low,  high, N, animations) =>
 
 
   // performs bubble sort animation
-const MergeSortAnimation = (animateArr, speed) => {
+const MergeSortAnimation = async (animateArr, speed) => {
     for (let i = 0; i < animateArr.length; i++) {
         (function(index) {
             setTimeout(function() {
@@ -128,6 +130,7 @@ const MergeSortAnimation = (animateArr, speed) => {
             }, (index) * speed);
         })(i)
     }
+    await wait(animateArr.length * speed * 2);
 }
   
 

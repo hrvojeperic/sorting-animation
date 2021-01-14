@@ -1,8 +1,10 @@
+let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 // initiates quick sort methods
-const QuickSortUtility = (stateArray, speed) => {
+const QuickSortUtility = async (stateArray, speed) => {
     let copyArr = JSON.parse(JSON.stringify(stateArray));
     let animateArr = QuickSortAlgorithm(copyArr);
-    QuickSortAnimation(animateArr, speed);
+    await QuickSortAnimation(animateArr, speed);
 }
 
 const partition = (arr, low, high, animations)  => {
@@ -66,7 +68,7 @@ const QuickSortAlgorithm = (arr) => {
 }
 
 // performs quick sort animation
-const QuickSortAnimation = (animateArr, speed) => {
+const QuickSortAnimation = async (animateArr, speed) => {
   for (let i = 0; i < animateArr.length; i++) {
       (function(index) {
           setTimeout(function() {
@@ -103,6 +105,7 @@ const QuickSortAnimation = (animateArr, speed) => {
           }, (index) * speed);
       })(i)
   }
+  await wait(animateArr.length * speed * 2);
 }
 
 export default QuickSortUtility;

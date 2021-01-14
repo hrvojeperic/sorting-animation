@@ -53,34 +53,34 @@ class SortingAnimation extends Component {
     }
 
     // initiate insertion sort
-    insertionSortHandler = () => {
+    insertionSortHandler = async () => {
         this.setState({isSortButtonDisable: true});
         this.setState({isNewButtonDisable: true});
-        InsertionSortUtility(this.state.animationArray, this.state.animationSpeed);
+        await InsertionSortUtility(this.state.animationArray, this.state.animationSpeed);
         this.setState({isNewButtonDisable: false});
     }
 
     // initiate quick sort
-    selectionSortHandler = () => {
+    selectionSortHandler = async () => {
         this.setState({isSortButtonDisable: true});
         this.setState({isNewButtonDisable: true});
-        SelectionSortUtility(this.state.animationArray, this.state.animationSpeed);
+        await SelectionSortUtility(this.state.animationArray, this.state.animationSpeed);
         this.setState({isNewButtonDisable: false});
     }
 
     // initiate merge sort
-    mergeSortHandler = () => {
+    mergeSortHandler = async () => {
         this.setState({isSortButtonDisable: true});
         this.setState({isNewButtonDisable: true});
-        MergeSortUtility(this.state.animationArray, this.state.animationSpeed);
+        await MergeSortUtility(this.state.animationArray, this.state.animationSpeed);
         this.setState({isNewButtonDisable: false});
     }
 
     // initiate quick sort
-    quickSortHandler = () => {
+    quickSortHandler = async () => {
         this.setState({isSortButtonDisable: true});
         this.setState({isNewButtonDisable: true});
-        QuickSortUtility(this.state.animationArray, this.state.animationSpeed);
+        await QuickSortUtility(this.state.animationArray, this.state.animationSpeed);
         this.setState({isNewButtonDisable: false});
     }
 
