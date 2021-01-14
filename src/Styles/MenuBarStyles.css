@@ -11,3 +11,10 @@
     margin: 7px;
     background-color: white;
 }
+
+.Menu text {
+    padding: 8px 30px;
+    display: inline-block;
+    margin: 7px;
+    color: white;
+}

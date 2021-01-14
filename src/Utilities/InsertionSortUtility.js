@@ -1,10 +1,13 @@
 let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-
+let numOfComparisons = 0;
+let numOfSwaps = 0;
 // initiates insertion sort methods
 const InsertionSortUtility = async (stateArray, speed) => {
+
     let copyArr = JSON.parse(JSON.stringify(stateArray));
     let animateArr = InsertionSortAlgorithm(copyArr);
     await InsertionSortAnimation(animateArr, speed);
+    return [numOfComparisons, numOfSwaps];  
 }
 
 // performs insertion sort on array
@@ -13,12 +16,15 @@ const InsertionSortAlgorithm = (arr) => {
     let animations = [];
     for (let i = 1; i < length; i++) {
         let j = i;
+        numOfComparisons++;
         if (arr[j].value >= arr[j-1].value) {
             animations.push([j-1, i, true, false]); // highlight animation
             animations.push([j-1, i, false, false]) // un-highlight animation
         }
         else {
             while (j > 0 && arr[j].value < arr[j-1].value) {
+                numOfComparisons++;
+                numOfSwaps++;
                 animations.push([j-1, j, true, false]) // highlight animation
                 animations.push([j-1, j, true, true]) // swap animation
                 let temp = arr[j].value;
@@ -35,7 +41,6 @@ const InsertionSortAlgorithm = (arr) => {
 // performs insertion sort animation
 const InsertionSortAnimation = async (animateArr, speed) => {
     for (let i = 0; i < animateArr.length; i++) {
-        console.log(animateArr[i]);
         (function(index) {
             setTimeout(function() {
                 let blockArray = document.getElementsByClassName('block');

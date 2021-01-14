@@ -1,10 +1,14 @@
 let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
+let numOfComparisons = 0;
+let numOfSwaps = 0;
+
 // initiates bubble sort methods
-const SelectionSortUtility = async (stateArray, speed) => {
+const SelectionSortUtility = async (stateArray, speed) => { 
     let copyArr = JSON.parse(JSON.stringify(stateArray));
     let animateArr = SelectionSortAlgorithm(copyArr);
     await SelectionSortAnimation(animateArr, speed);
+    return [numOfComparisons, numOfSwaps];
 }
 
 const sort = (arr, animations) => { 
@@ -18,6 +22,7 @@ const sort = (arr, animations) => {
             animations.push([j, j, true, false]) // highlight animation
             //animations.push([min_idx, j, true, false]) // highlight animation
             //animations.push([j, j, true, false]) // highlight animation
+            numOfComparisons++;
             if (arr[j].value < arr[min_idx].value) { 
                // animations.push([min_idx, min_idx, false, false]) // un-highlight animation
                 min_idx = j;
@@ -29,6 +34,7 @@ const sort = (arr, animations) => {
 
         // Swap the found minimum element with the first 
         // element 
+        numOfSwaps++;
         animations.push([min_idx, i, true, false]) // highlight animation
         animations.push([min_idx, i, true, true]) // swap animation
         animations.push([min_idx, i, false, false]) // un-highlight animation
@@ -40,7 +46,7 @@ const sort = (arr, animations) => {
 
 // performs bubble sort on array
 const SelectionSortAlgorithm = (arr) => {
-    let length = arr.length;
+    //let length = arr.length;
     let animations = [];
     sort(arr, animations);
     return animations;

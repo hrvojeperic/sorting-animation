@@ -1,10 +1,12 @@
 let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-
+let numOfComparisons = 0;
+let numOfSwaps = 0;
 // initiates merge sort methods
 const MergeSortUtility = async (stateArray, speed) => {
     let copyArr = JSON.parse(JSON.stringify(stateArray));
     let animateArr = MergeSortAlgorithm(copyArr);
     await MergeSortAnimation(animateArr, speed);
+    return [numOfComparisons, numOfSwaps];  
 }
 
 // performs merge sort on array
@@ -31,8 +33,9 @@ const merge = ( A,  temp,  from,  mid,  to, N, animations) =>
 	while (i <= mid && j <= to) {
     animations.push([i, j, true, false]); // highlight animation
     animations.push([i, j, false, false]); // un-highlight animation
-
+    numOfComparisons++;
 		if (A[i].value < A[j].value) {
+      numOfSwaps++;
       animations.push([k, A[i].value, true, true]); // swap animation
       console.log("k: ", k, " i: ", i);
       console.log(JSON.parse(JSON.stringify(temp)));
@@ -40,6 +43,7 @@ const merge = ( A,  temp,  from,  mid,  to, N, animations) =>
       temp[k++].value = A[i++].value;
     }
 		else {
+      numOfSwaps++;
       animations.push([k, A[j].value, true, true]); // swap animation
       console.log("k: ", k, " j: ", j);
       console.log(JSON.parse(JSON.stringify(temp)));
@@ -50,6 +54,7 @@ const merge = ( A,  temp,  from,  mid,  to, N, animations) =>
 
 	// Copy remaining elements
 	while (i < N && i <= mid) {
+    numOfSwaps++;
     animations.push([i, i, true, false]); // highlight animation
     animations.push([i, i, false, false]); // un-highlight animation
     animations.push([k, A[i].value, true, true]); // swap animation

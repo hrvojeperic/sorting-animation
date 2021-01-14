@@ -1,10 +1,14 @@
 let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+let numOfComparisons = 0;
+let numOfSwaps = 0;
 
 // initiates bubble sort methods
 const BubbleSortUtility = async (stateArray, speed) => {
+    
     let copyArr = JSON.parse(JSON.stringify(stateArray));
     let animateArr = BubbleSortAlgorithm(copyArr);
     await BubbleSortAnimation(animateArr, speed);
+    return [numOfComparisons, numOfSwaps];  
 }
 
 // performs bubble sort on array
@@ -14,7 +18,9 @@ const BubbleSortAlgorithm = (arr) => {
     for (let i = 0; i < length - 1; i++) {
         for (let j = 0; j < length - i - 1; j++) {
             animations.push([j, j+1, true, false]) // highlight animation
+            numOfComparisons++;
             if (arr[j].value > arr[j+1].value) {
+                numOfSwaps++;
                 let temp = arr[j].value;
                 arr[j].value = arr[j+1].value;
                 arr[j+1].value = temp;

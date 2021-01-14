@@ -11,6 +11,10 @@ const MenuBarComponent = (props) => {
             <button disabled={props.isSortButtonDisable} onClick={props.selection}>Selection Sort</button>
             <button disabled={props.isSortButtonDisable} onClick={props.merge}>Merge Sort</button>
             <button disabled={props.isSortButtonDisable} onClick={props.quick}>Quick Sort</button>
+            <div>
+                <text>Comparisons: {props.numOfComparisons}</text>
+                <text>Swaps: {props.numOfSwaps}</text>
+            </div>
         </div>
     );
 }

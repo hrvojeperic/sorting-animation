@@ -1,10 +1,12 @@
 let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-
+let numOfComparisons = 0;
+let numOfSwaps = 0;
 // initiates quick sort methods
 const QuickSortUtility = async (stateArray, speed) => {
     let copyArr = JSON.parse(JSON.stringify(stateArray));
     let animateArr = QuickSortAlgorithm(copyArr);
     await QuickSortAnimation(animateArr, speed);
+    return [numOfComparisons, numOfSwaps];  
 }
 
 const partition = (arr, low, high, animations)  => {
@@ -16,7 +18,9 @@ const partition = (arr, low, high, animations)  => {
     { 
         // If current element is smaller than the pivot 
         animations.push([j, i+1, true, false]) // highlight animation
+        numOfComparisons++;
         if (arr[j].value < pivot) { 
+            numOfSwaps++;
             isLess = true;
             i++;
             // swap arr[i] and arr[j] 
@@ -32,6 +36,7 @@ const partition = (arr, low, high, animations)  => {
             animations.push([j, i, false, false]) // un-highlight animation
         }
     } 
+    numOfSwaps++;
     animations.push([i+1, high, true, false]) // highlight animation
     // swap arr[i+1] and arr[high] (or pivot) 
     let temp = arr[i+1].value; 

@@ -14,12 +14,14 @@ class SortingAnimation extends Component {
 
     state = {
         animationArray: [],
-        arraySize: 50,
+        arraySize: 150,
         minElementSize: 10,
         maxElementSize: 500,
-        animationSpeed: 2,
+        animationSpeed: 1,
         isNewButtonDisable: false,
-        isSortButtonDisable: false
+        isSortButtonDisable: false,
+        numOfComparisons: 0,
+        numOfSwaps: 0
     }
 
     // create new array when component mounted
@@ -30,8 +32,7 @@ class SortingAnimation extends Component {
     // initiate new array
     newArrayHandler = () => {
         let newArr = NewArrayUtility(this.state.arraySize, this.state.minElementSize, this.state.maxElementSize);
-        this.setState({animationArray: newArr});
-        this.setState({isSortButtonDisable: false});
+        this.setState({animationArray: newArr, isSortButtonDisable: false, numOfComparisons: 0, numOfSwaps: 0});
         /*this.setState({animationArray: [{id: uuidv4(), value: 500}, 
                                         {id: uuidv4(), value: 400},
                                         {id: uuidv4(), value: 300}, 
@@ -48,40 +49,40 @@ class SortingAnimation extends Component {
     bubbleSortHandler = async () => {
         this.setState({isSortButtonDisable: true});
         this.setState({isNewButtonDisable: true});
-        await BubbleSortUtility(this.state.animationArray, this.state.animationSpeed, this.state);
-        this.setState({isNewButtonDisable: false});
+        const [comparisons, swaps] = await BubbleSortUtility(this.state.animationArray, this.state.animationSpeed);
+        this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
     }
 
     // initiate insertion sort
     insertionSortHandler = async () => {
         this.setState({isSortButtonDisable: true});
         this.setState({isNewButtonDisable: true});
-        await InsertionSortUtility(this.state.animationArray, this.state.animationSpeed);
-        this.setState({isNewButtonDisable: false});
+        const [comparisons, swaps] = await InsertionSortUtility(this.state.animationArray, this.state.animationSpeed);
+        this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
     }
 
     // initiate quick sort
     selectionSortHandler = async () => {
         this.setState({isSortButtonDisable: true});
         this.setState({isNewButtonDisable: true});
-        await SelectionSortUtility(this.state.animationArray, this.state.animationSpeed);
-        this.setState({isNewButtonDisable: false});
+        const [comparisons, swaps] = await SelectionSortUtility(this.state.animationArray, this.state.animationSpeed);
+        this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
     }
 
     // initiate merge sort
     mergeSortHandler = async () => {
         this.setState({isSortButtonDisable: true});
         this.setState({isNewButtonDisable: true});
-        await MergeSortUtility(this.state.animationArray, this.state.animationSpeed);
-        this.setState({isNewButtonDisable: false});
+        const [comparisons, swaps] = await MergeSortUtility(this.state.animationArray, this.state.animationSpeed);
+        this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
     }
 
     // initiate quick sort
     quickSortHandler = async () => {
         this.setState({isSortButtonDisable: true});
         this.setState({isNewButtonDisable: true});
-        await QuickSortUtility(this.state.animationArray, this.state.animationSpeed);
-        this.setState({isNewButtonDisable: false});
+        const [comparisons, swaps] = await QuickSortUtility(this.state.animationArray, this.state.animationSpeed);
+        this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
     }
 
     render() {
@@ -95,6 +96,8 @@ class SortingAnimation extends Component {
                 <MenuBarComponent 
                     isNewButtonDisable={this.state.isNewButtonDisable}
                     isSortButtonDisable={this.state.isSortButtonDisable}
+                    numOfComparisons={this.state.numOfComparisons}
+                    numOfSwaps={this.state.numOfSwaps}
                     new={() => this.newArrayHandler()}
                     bubble={() => this.bubbleSortHandler()}
                     insertion={() => this.insertionSortHandler()}
