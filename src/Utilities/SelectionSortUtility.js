@@ -1,37 +1,52 @@
-let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-
 // initiates bubble sort methods
-const BubbleSortUtility = async (stateArray, speed) => {
+const SelectionSortUtility = (stateArray, speed) => {
     let copyArr = JSON.parse(JSON.stringify(stateArray));
-    let animateArr = BubbleSortAlgorithm(copyArr);
-    const temp = await BubbleSortAnimation(animateArr, speed);
+    let animateArr = SelectionSortAlgorithm(copyArr);
+    SelectionSortAnimation(animateArr, speed);
 }
 
+const sort = (arr, animations) => { 
+    let n = arr.length; 
+
+    // One by one move boundary of unsorted subarray 
+    for (let i = 0; i < n-1; i++) { 
+        // Find the minimum element in unsorted array 
+        let min_idx = i;
+        for (let j = i+1; j < n; j++) {
+            animations.push([j, j, true, false]) // highlight animation
+            //animations.push([min_idx, j, true, false]) // highlight animation
+            //animations.push([j, j, true, false]) // highlight animation
+            if (arr[j].value < arr[min_idx].value) { 
+               // animations.push([min_idx, min_idx, false, false]) // un-highlight animation
+                min_idx = j;
+            }
+            animations.push([j, j, false, false]) // un-highlight animation
+            //animations.push([min_idx, j, true, false]) // highlight animation
+            //animations.push([min_idx, j, false, false]) // un-highlight animation
+        }
+
+        // Swap the found minimum element with the first 
+        // element 
+        animations.push([min_idx, i, true, false]) // highlight animation
+        animations.push([min_idx, i, true, true]) // swap animation
+        animations.push([min_idx, i, false, false]) // un-highlight animation
+        let temp = arr[min_idx].value; 
+        arr[min_idx].value = arr[i].value; 
+        arr[i].value = temp; 
+    } 
+} 
+
 // performs bubble sort on array
-const BubbleSortAlgorithm = (arr) => {
+const SelectionSortAlgorithm = (arr) => {
     let length = arr.length;
     let animations = [];
-    for (let i = 0; i < length - 1; i++) {
-        for (let j = 0; j < length - i - 1; j++) {
-            animations.push([j, j+1, true, false]) // highlight animation
-            if (arr[j].value > arr[j+1].value) {
-                let temp = arr[j].value;
-                arr[j].value = arr[j+1].value;
-                arr[j+1].value = temp;
-                animations.push([j, j+1, true, true]) // swap animation
-            }
-            animations.push([j, j+1, false, false]) // un-highlight animation
-        }
-    }
+    sort(arr, animations);
     return animations;
 }
 
 // performs bubble sort animation
-const BubbleSortAnimation = async (animateArr, speed) => {
-    let acc = 0; 
-        
+const SelectionSortAnimation = (animateArr, speed) => {
     for (let i = 0; i < animateArr.length; i++) {
-        
         (function(index) {
             setTimeout(function() {
                 let blockArray = document.getElementsByClassName('block');
@@ -40,14 +55,12 @@ const BubbleSortAnimation = async (animateArr, speed) => {
                     setTimeout(function() {
                         blockArray[curr].style.backgroundColor = 'red';
                         blockArray[next].style.backgroundColor = 'red';
-                        acc = index*speed;
                     }, index * speed);
                 }
                 else if (isCompare === false && isSwap === false) { // un-highlight animation
                     setTimeout(function() {
                         blockArray[curr].style.backgroundColor = '#282c34';
                         blockArray[next].style.backgroundColor = '#282c34';
-                        acc = index*speed;
                     }, index * speed);
                 }
                 else if (isCompare === true && isSwap === true) { // swap animation
@@ -58,15 +71,11 @@ const BubbleSortAnimation = async (animateArr, speed) => {
                         blockArray[next].style.height = nextHeight;
                         blockArray[curr].style.height = currHeight+'px';
                         blockArray[next].style.height = nextHeight+'px';
-                        acc = index*speed;
                     }, index * speed);
                 }
-                acc = index*speed;
             }, (index) * speed);
         })(i)
     }
-    await wait(animateArr.length * speed * 2);
-    return 1;
 }
 
-export default BubbleSortUtility;
+export default SelectionSortUtility;
