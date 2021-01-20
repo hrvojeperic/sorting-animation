@@ -7,6 +7,9 @@ import SelectionSortUtility from '../Utilities/SelectionSortUtility.js';
 import MergeSortUtility from '../Utilities/MergeSortUtility.js';
 import QuickSortUtility from '../Utilities/QuickSortUtility.js';
 import NewArrayUtility from '../Utilities/NewArrayUtility.js';
+
+
+
 import { v4 as uuidv4 } from 'uuid'; // fixed hard bug
 
 
@@ -21,7 +24,10 @@ class SortingAnimation extends Component {
         isNewButtonDisable: false,
         isSortButtonDisable: false,
         numOfComparisons: 0,
-        numOfSwaps: 0
+        numOfSwaps: 0,
+        bestCase: "Ω(?)",
+        averageCase: "θ(?)",
+        worstCase: "O(?)"
     }
 
     // create new array when component mounted
@@ -32,7 +38,9 @@ class SortingAnimation extends Component {
     // initiate new array
     newArrayHandler = () => {
         let newArr = NewArrayUtility(this.state.arraySize, this.state.minElementSize, this.state.maxElementSize);
-        this.setState({animationArray: newArr, isSortButtonDisable: false, numOfComparisons: 0, numOfSwaps: 0});
+        this.setState({animationArray: newArr, isSortButtonDisable: false, numOfComparisons: 0, numOfSwaps: 0, bestCase: "Ω(?)", averageCase: "θ(?)", worstCase: "O(?)"});
+        document.getElementById("Comparisons").innerHTML = "0";
+        document.getElementById("Swaps").innerHTML = "0";
         /*this.setState({animationArray: [{id: uuidv4(), value: 500}, 
                                         {id: uuidv4(), value: 400},
                                         {id: uuidv4(), value: 300}, 
@@ -47,42 +55,52 @@ class SortingAnimation extends Component {
 
     // initiate bubble sort
     bubbleSortHandler = async () => {
-        this.setState({isSortButtonDisable: true});
-        this.setState({isNewButtonDisable: true});
+        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n)", averageCase: "θ(n^2)", worstCase: "O(n^2)"});
         const [comparisons, swaps] = await BubbleSortUtility(this.state.animationArray, this.state.animationSpeed);
-        this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
+        //this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
+        this.setState({isNewButtonDisable: false});
+        console.log(comparisons);
+        console.log(swaps);
     }
 
     // initiate insertion sort
     insertionSortHandler = async () => {
-        this.setState({isSortButtonDisable: true});
-        this.setState({isNewButtonDisable: true});
+        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n)", averageCase: "θ(n^2)", worstCase: "O(n^2)"});
         const [comparisons, swaps] = await InsertionSortUtility(this.state.animationArray, this.state.animationSpeed);
-        this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
+        //this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
+        this.setState({isNewButtonDisable: false});
+        console.log(comparisons);
+        console.log(swaps);
     }
 
     // initiate quick sort
     selectionSortHandler = async () => {
-        this.setState({isSortButtonDisable: true});
-        this.setState({isNewButtonDisable: true});
+        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n^2)", averageCase: "θ(n^2)", worstCase: "O(n^2)"});
         const [comparisons, swaps] = await SelectionSortUtility(this.state.animationArray, this.state.animationSpeed);
-        this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
+        // this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
+        this.setState({isNewButtonDisable: false});
+        console.log(comparisons);
+        console.log(swaps);
     }
 
     // initiate merge sort
     mergeSortHandler = async () => {
-        this.setState({isSortButtonDisable: true});
-        this.setState({isNewButtonDisable: true});
+        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n log(n))", averageCase: "θ(n log(n))", worstCase: "O(n log(n))"});
         const [comparisons, swaps] = await MergeSortUtility(this.state.animationArray, this.state.animationSpeed);
-        this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
+        // this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
+        this.setState({isNewButtonDisable: false});
+        console.log(comparisons);
+        console.log(swaps);
     }
 
-    // initiate quick sort
+    // initiate quick sort  
     quickSortHandler = async () => {
-        this.setState({isSortButtonDisable: true});
-        this.setState({isNewButtonDisable: true});
+        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n log(n))", averageCase: "θ(n log(n))", worstCase: "O(n^2)"});
         const [comparisons, swaps] = await QuickSortUtility(this.state.animationArray, this.state.animationSpeed);
-        this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
+        //this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
+        this.setState({isNewButtonDisable: false});
+        console.log(comparisons);
+        console.log(swaps);
     }
 
     render() {
@@ -98,12 +116,16 @@ class SortingAnimation extends Component {
                     isSortButtonDisable={this.state.isSortButtonDisable}
                     numOfComparisons={this.state.numOfComparisons}
                     numOfSwaps={this.state.numOfSwaps}
+                    bestCase={this.state.bestCase}
+                    averageCase={this.state.averageCase}
+                    worstCase={this.state.worstCase}
                     new={() => this.newArrayHandler()}
                     bubble={() => this.bubbleSortHandler()}
                     insertion={() => this.insertionSortHandler()}
                     selection={() => this.selectionSortHandler()}
                     merge={() => this.mergeSortHandler()}
-                    quick={() => this.quickSortHandler()} />
+                    quick={() => this.quickSortHandler()} 
+                />
                 <div className='container'>
                     {boxList}
                 </div>

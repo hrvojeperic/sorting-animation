@@ -18,3 +18,19 @@
     margin: 7px;
     color: white;
 }
+
+.Menu table {
+    padding: 8px 30px;
+    display: inline-block;
+    margin: 7px;
+    color: white;
+}
+
+col {
+    position: sticky;
+}
+
+.header td {
+    font-weight: bold;
+    padding: 0 45px;
+}

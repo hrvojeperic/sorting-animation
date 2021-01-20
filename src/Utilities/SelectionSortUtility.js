@@ -35,7 +35,7 @@ const sort = (arr, animations) => {
         // Swap the found minimum element with the first 
         // element 
         numOfSwaps++;
-        animations.push([min_idx, i, true, false]) // highlight animation
+        //animations.push([min_idx, i, true, false]) // highlight animation TOOK THIS OUT TO MATCH COMPARISONS
         animations.push([min_idx, i, true, true]) // swap animation
         animations.push([min_idx, i, false, false]) // un-highlight animation
         let temp = arr[min_idx].value; 
@@ -54,6 +54,8 @@ const SelectionSortAlgorithm = (arr) => {
 
 // performs bubble sort animation
 const SelectionSortAnimation = async (animateArr, speed) => {
+    let numC = 0;
+    let numS = 0;
     for (let i = 0; i < animateArr.length; i++) {
         (function(index) {
             setTimeout(function() {
@@ -61,6 +63,8 @@ const SelectionSortAnimation = async (animateArr, speed) => {
                 let [curr, next, isCompare, isSwap] = animateArr[i];
                 if (isCompare === true && isSwap === false) { // highlight animation
                     setTimeout(function() {
+                        numC++;
+                        document.getElementById("Comparisons").innerHTML = "" + numC;
                         blockArray[curr].style.backgroundColor = 'red';
                         blockArray[next].style.backgroundColor = 'red';
                     }, index * speed);
@@ -73,6 +77,8 @@ const SelectionSortAnimation = async (animateArr, speed) => {
                 }
                 else if (isCompare === true && isSwap === true) { // swap animation
                     setTimeout(function() {
+                        numS++;
+                        document.getElementById("Swaps").innerHTML = "" + numS;
                         let currHeight = blockArray[next].style.height;
                         let nextHeight = blockArray[curr].style.height;
                         blockArray[curr].style.height = currHeight;

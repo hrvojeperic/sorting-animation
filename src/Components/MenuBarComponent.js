@@ -12,8 +12,29 @@ const MenuBarComponent = (props) => {
             <button disabled={props.isSortButtonDisable} onClick={props.merge}>Merge Sort</button>
             <button disabled={props.isSortButtonDisable} onClick={props.quick}>Quick Sort</button>
             <div>
-                <text>Comparisons: {props.numOfComparisons}</text>
-                <text>Swaps: {props.numOfSwaps}</text>
+                <table>
+                <col id="col1" />
+                <col id="col2" />
+                <col id="col3" />
+                <col id="col4" />
+                <col id="col5" />
+                    <tbody>
+                        <tr className="header">
+                            <td>Best</td>
+                            <td>Average</td>
+                            <td>Worst</td>
+                            <td>Comparisons</td>
+                            <td>Swaps</td>
+                        </tr>
+                        <tr>
+                            <td>{props.bestCase}</td>
+                            <td>{props.averageCase}</td>
+                            <td>{props.worstCase}</td>
+                            <td id='Comparisons'></td>
+                            <td id='Swaps'></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     );

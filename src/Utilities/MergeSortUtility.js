@@ -37,17 +37,17 @@ const merge = ( A,  temp,  from,  mid,  to, N, animations) =>
 		if (A[i].value < A[j].value) {
       numOfSwaps++;
       animations.push([k, A[i].value, true, true]); // swap animation
-      console.log("k: ", k, " i: ", i);
-      console.log(JSON.parse(JSON.stringify(temp)));
-      console.log(JSON.parse(JSON.stringify(A)));
+      //console.log("k: ", k, " i: ", i);
+      //console.log(JSON.parse(JSON.stringify(temp)));
+      //console.log(JSON.parse(JSON.stringify(A)));
       temp[k++].value = A[i++].value;
     }
 		else {
       numOfSwaps++;
       animations.push([k, A[j].value, true, true]); // swap animation
-      console.log("k: ", k, " j: ", j);
-      console.log(JSON.parse(JSON.stringify(temp)));
-      console.log(JSON.parse(JSON.stringify(A)));
+      // console.log("k: ", k, " j: ", j);
+      // console.log(JSON.parse(JSON.stringify(temp)));
+      // console.log(JSON.parse(JSON.stringify(A)));
       temp[k++].value = A[j++].value; 
     }
 	}
@@ -55,8 +55,8 @@ const merge = ( A,  temp,  from,  mid,  to, N, animations) =>
 	// Copy remaining elements
 	while (i < N && i <= mid) {
     numOfSwaps++;
-    animations.push([i, i, true, false]); // highlight animation
-    animations.push([i, i, false, false]); // un-highlight animation
+    //animations.push([i, i, true, false]); // highlight animation TOOOK THIS OUT TO MATCH COMPARISONS
+    //animations.push([i, i, false, false]); // un-highlight animation TOOOK THIS OUT TO MATCH COMPARISONS
     animations.push([k, A[i].value, true, true]); // swap animation
     temp[k++].value = A[i++].value;
   }
@@ -94,6 +94,8 @@ const mergesort = ( A,  temp,  low,  high, N, animations) =>
 
   // performs bubble sort animation
 const MergeSortAnimation = async (animateArr, speed) => {
+    let numC = 0;
+    let numS = 0;
     for (let i = 0; i < animateArr.length; i++) {
         (function(index) {
             setTimeout(function() {
@@ -101,7 +103,8 @@ const MergeSortAnimation = async (animateArr, speed) => {
                 let [curr, next, isCompare, isSwap] = animateArr[i];
                 if (isCompare === true && isSwap === false) { // highlight animation
                     setTimeout(function() {
-                        //console.log(blockArray);
+                        numC++;
+                        document.getElementById("Comparisons").innerHTML = "" + numC;
                         blockArray[curr].style.backgroundColor = 'red';
                         blockArray[next].style.backgroundColor = 'red';
                     }, index * speed);
@@ -114,6 +117,8 @@ const MergeSortAnimation = async (animateArr, speed) => {
                 }
                 else if (isCompare === true && isSwap === true) { // swap animation
                   setTimeout(function() {
+                      numS++;
+                      document.getElementById("Swaps").innerHTML = "" + numS;
                       /*let currHeight = blockArray[next].style.height;
                       let nextHeight = blockArray[curr].style.height;
                       blockArray[curr].style.height = currHeight;
