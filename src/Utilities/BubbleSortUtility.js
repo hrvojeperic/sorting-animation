@@ -6,7 +6,7 @@ let numOfSwaps = 0;
 const BubbleSortUtility = async (stateArray, speed) => {   
     let copyArr = JSON.parse(JSON.stringify(stateArray));
     let animateArr = BubbleSortAlgorithm(copyArr);
-    await BubbleSortAnimation(animateArr, speed);
+    await BubbleSortAnimation(animateArr, speed);  
     return [numOfComparisons, numOfSwaps];  
 }
 
@@ -33,11 +33,13 @@ const BubbleSortAlgorithm = (arr) => {
 
 // performs bubble sort animation
 const BubbleSortAnimation = async (animateArr, speed) => {
-    let numC = 0;
-    let numS = 0;
+    // let numC = 0;
+    // let numS = 0;
+    var numC = { value: 0 };
+    var numS = { value: 0 };
     for (let i = 0; i < animateArr.length; i++) {
-        
-        (function(index) {
+        animate(animateArr, speed, i, numC, numS);
+        /*(function(index) {
             setTimeout(function() {
                 let blockArray = document.getElementsByClassName('block');
                 let [curr, next, isCompare, isSwap] = animateArr[i];
@@ -72,9 +74,48 @@ const BubbleSortAnimation = async (animateArr, speed) => {
                 }
                 
             }, (index) * speed);
-        })(i)
+        })(i)*/
     }
     await wait(animateArr.length * speed * 2);
+}
+
+const animate = (animateArr, speed, i, numC, numS) => {
+    (function(index) {
+        setTimeout(function() {
+            let blockArray = document.getElementsByClassName('block');
+            let [curr, next, isCompare, isSwap] = animateArr[i];
+            if (isCompare === true && isSwap === false) { // highlight animation
+                setTimeout(function() {
+                    numC.value++;
+                    document.getElementById("Comparisons").innerHTML = "" + numC.value;
+                    blockArray[curr].style.backgroundColor = 'red';
+                    blockArray[next].style.backgroundColor = 'red';
+                    
+                }, index * speed);
+            }
+            else if (isCompare === false && isSwap === false) { // un-highlight animation
+                setTimeout(function() {
+                    blockArray[curr].style.backgroundColor = '#282c34';
+                    blockArray[next].style.backgroundColor = '#282c34';
+                    
+                }, index * speed);
+            }
+            else if (isCompare === true && isSwap === true) { // swap animation
+                setTimeout(function() {
+                    numS.value++;
+                    document.getElementById("Swaps").innerHTML = "" + numS.value;
+                    let currHeight = blockArray[next].style.height;
+                    let nextHeight = blockArray[curr].style.height;
+                    blockArray[curr].style.height = currHeight;
+                    blockArray[next].style.height = nextHeight;
+                    blockArray[curr].style.height = currHeight+'px';
+                    blockArray[next].style.height = nextHeight+'px';
+                   
+                }, index * speed);
+            }
+            
+        }, (index) * speed);
+    })(i)
 }
 
 export default BubbleSortUtility;

@@ -8,11 +8,6 @@ import MergeSortUtility from '../Utilities/MergeSortUtility.js';
 import QuickSortUtility from '../Utilities/QuickSortUtility.js';
 import NewArrayUtility from '../Utilities/NewArrayUtility.js';
 
-
-
-import { v4 as uuidv4 } from 'uuid'; // fixed hard bug
-
-
 class SortingAnimation extends Component {
 
     state = {
@@ -41,23 +36,12 @@ class SortingAnimation extends Component {
         this.setState({animationArray: newArr, isSortButtonDisable: false, numOfComparisons: 0, numOfSwaps: 0, bestCase: "Ω(?)", averageCase: "θ(?)", worstCase: "O(?)"});
         document.getElementById("Comparisons").innerHTML = "0";
         document.getElementById("Swaps").innerHTML = "0";
-        /*this.setState({animationArray: [{id: uuidv4(), value: 500}, 
-                                        {id: uuidv4(), value: 400},
-                                        {id: uuidv4(), value: 300}, 
-                                        {id: uuidv4(), value: 200}, 
-                                        {id: uuidv4(), value: 100}]}, () => {
-            console.log(this.state.animationArray);
-            console.log(this.state.animationArray.length);
-            console.log(this.state.animationArray[0].value);
-        });*/
     }
-
 
     // initiate bubble sort
     bubbleSortHandler = async () => {
         this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n)", averageCase: "θ(n^2)", worstCase: "O(n^2)"});
         const [comparisons, swaps] = await BubbleSortUtility(this.state.animationArray, this.state.animationSpeed);
-        //this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
         this.setState({isNewButtonDisable: false});
         console.log(comparisons);
         console.log(swaps);
@@ -67,7 +51,6 @@ class SortingAnimation extends Component {
     insertionSortHandler = async () => {
         this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n)", averageCase: "θ(n^2)", worstCase: "O(n^2)"});
         const [comparisons, swaps] = await InsertionSortUtility(this.state.animationArray, this.state.animationSpeed);
-        //this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
         this.setState({isNewButtonDisable: false});
         console.log(comparisons);
         console.log(swaps);
@@ -77,7 +60,6 @@ class SortingAnimation extends Component {
     selectionSortHandler = async () => {
         this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n^2)", averageCase: "θ(n^2)", worstCase: "O(n^2)"});
         const [comparisons, swaps] = await SelectionSortUtility(this.state.animationArray, this.state.animationSpeed);
-        // this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
         this.setState({isNewButtonDisable: false});
         console.log(comparisons);
         console.log(swaps);
@@ -87,7 +69,6 @@ class SortingAnimation extends Component {
     mergeSortHandler = async () => {
         this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n log(n))", averageCase: "θ(n log(n))", worstCase: "O(n log(n))"});
         const [comparisons, swaps] = await MergeSortUtility(this.state.animationArray, this.state.animationSpeed);
-        // this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
         this.setState({isNewButtonDisable: false});
         console.log(comparisons);
         console.log(swaps);
@@ -97,7 +78,6 @@ class SortingAnimation extends Component {
     quickSortHandler = async () => {
         this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n log(n))", averageCase: "θ(n log(n))", worstCase: "O(n^2)"});
         const [comparisons, swaps] = await QuickSortUtility(this.state.animationArray, this.state.animationSpeed);
-        //this.setState({numOfComparisons: comparisons, numOfSwaps: swaps, isNewButtonDisable: false});
         this.setState({isNewButtonDisable: false});
         console.log(comparisons);
         console.log(swaps);

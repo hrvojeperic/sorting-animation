@@ -1,5 +1,4 @@
 import React from 'react';
-import SortingAnimation from './SortingAnimation.js';
 import '../Styles/MenuBarStyles.css';
 
 const MenuBarComponent = (props) => {

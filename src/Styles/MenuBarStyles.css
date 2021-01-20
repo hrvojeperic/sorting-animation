@@ -12,6 +12,12 @@
     background-color: white;
 }
 
+button:hover:enabled{
+    background-color: #3b3f47;
+    color: white;
+}
+
+
 .Menu text {
     padding: 8px 30px;
     display: inline-block;
