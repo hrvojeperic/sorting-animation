@@ -8,8 +8,10 @@ import MergeSortUtility from '../Utilities/MergeSortUtility.js';
 import QuickSortUtility from '../Utilities/QuickSortUtility.js';
 import NewArrayUtility from '../Utilities/NewArrayUtility.js';
 
+// main component for animation
 class SortingAnimation extends Component {
 
+    // components state data
     state = {
         animationArray: [],
         arraySize: 150,
@@ -18,11 +20,14 @@ class SortingAnimation extends Component {
         animationSpeed: 1,
         isNewButtonDisable: false,
         isSortButtonDisable: false,
-        numOfComparisons: 0,
-        numOfSwaps: 0,
         bestCase: "Ω(?)",
         averageCase: "θ(?)",
-        worstCase: "O(?)"
+        worstCase: "O(?)",
+        bubbleButtonSelectedColor: "",
+        insertionButtonSelectedColor: "",
+        selectionButtonSelectedColor: "",
+        mergeButtonSelectedColor: "",
+        quickButtonSelectedColor: ""
     }
 
     // create new array when component mounted
@@ -33,14 +38,16 @@ class SortingAnimation extends Component {
     // initiate new array
     newArrayHandler = () => {
         let newArr = NewArrayUtility(this.state.arraySize, this.state.minElementSize, this.state.maxElementSize);
-        this.setState({animationArray: newArr, isSortButtonDisable: false, numOfComparisons: 0, numOfSwaps: 0, bestCase: "Ω(?)", averageCase: "θ(?)", worstCase: "O(?)"});
+        this.setState({animationArray: newArr, isSortButtonDisable: false, bubbleButtonSelectedColor: "white", insertionButtonSelectedColor: "white", 
+                        selectionButtonSelectedColor: "white", mergeButtonSelectedColor: "white", quickButtonSelectedColor: "white", 
+                        bestCase: "Ω(?)", averageCase: "θ(?)", worstCase: "O(?)"});
         document.getElementById("Comparisons").innerHTML = "0";
         document.getElementById("Swaps").innerHTML = "0";
     }
 
     // initiate bubble sort
     bubbleSortHandler = async () => {
-        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n)", averageCase: "θ(n^2)", worstCase: "O(n^2)"});
+        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bubbleButtonSelectedColor: "#3b3f47", bestCase: "Ω(n)", averageCase: "θ(n^2)", worstCase: "O(n^2)"});
         const [comparisons, swaps] = await BubbleSortUtility(this.state.animationArray, this.state.animationSpeed);
         this.setState({isNewButtonDisable: false});
         console.log(comparisons);
@@ -49,7 +56,7 @@ class SortingAnimation extends Component {
 
     // initiate insertion sort
     insertionSortHandler = async () => {
-        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n)", averageCase: "θ(n^2)", worstCase: "O(n^2)"});
+        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, insertionButtonSelectedColor: "#3b3f47", bestCase: "Ω(n)", averageCase: "θ(n^2)", worstCase: "O(n^2)"});
         const [comparisons, swaps] = await InsertionSortUtility(this.state.animationArray, this.state.animationSpeed);
         this.setState({isNewButtonDisable: false});
         console.log(comparisons);
@@ -58,7 +65,7 @@ class SortingAnimation extends Component {
 
     // initiate quick sort
     selectionSortHandler = async () => {
-        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n^2)", averageCase: "θ(n^2)", worstCase: "O(n^2)"});
+        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, selectionButtonSelectedColor: "#3b3f47", bestCase: "Ω(n^2)", averageCase: "θ(n^2)", worstCase: "O(n^2)"});
         const [comparisons, swaps] = await SelectionSortUtility(this.state.animationArray, this.state.animationSpeed);
         this.setState({isNewButtonDisable: false});
         console.log(comparisons);
@@ -67,7 +74,7 @@ class SortingAnimation extends Component {
 
     // initiate merge sort
     mergeSortHandler = async () => {
-        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n log(n))", averageCase: "θ(n log(n))", worstCase: "O(n log(n))"});
+        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, mergeButtonSelectedColor: "#3b3f47", bestCase: "Ω(n log(n))", averageCase: "θ(n log(n))", worstCase: "O(n log(n))"});
         const [comparisons, swaps] = await MergeSortUtility(this.state.animationArray, this.state.animationSpeed);
         this.setState({isNewButtonDisable: false});
         console.log(comparisons);
@@ -76,22 +83,29 @@ class SortingAnimation extends Component {
 
     // initiate quick sort  
     quickSortHandler = async () => {
-        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, bestCase: "Ω(n log(n))", averageCase: "θ(n log(n))", worstCase: "O(n^2)"});
+        this.setState({isSortButtonDisable: true, isNewButtonDisable: true, quickButtonSelectedColor: "#3b3f47", bestCase: "Ω(n log(n))", averageCase: "θ(n log(n))", worstCase: "O(n^2)"});
         const [comparisons, swaps] = await QuickSortUtility(this.state.animationArray, this.state.animationSpeed);
         this.setState({isNewButtonDisable: false});
         console.log(comparisons);
         console.log(swaps);
     }
 
+    // render to screen
     render() {
         // display list of boxes
         const boxList = this.state.animationArray.map((e, index) => {
             const boxHeight = e.value + 'px';
             return <div className='block' key={e.id} style={{height: boxHeight}}/>;
         });
+        // render menu bar and box list
         return (
             <div>
                 <MenuBarComponent 
+                    bubbleButtonSelectedColor={this.state.bubbleButtonSelectedColor}
+                    insertionButtonSelectedColor={this.state.insertionButtonSelectedColor}
+                    selectionButtonSelectedColor={this.state.selectionButtonSelectedColor}
+                    mergeButtonSelectedColor={this.state.mergeButtonSelectedColor}
+                    quickButtonSelectedColor={this.state.quickButtonSelectedColor}
                     isNewButtonDisable={this.state.isNewButtonDisable}
                     isSortButtonDisable={this.state.isSortButtonDisable}
                     numOfComparisons={this.state.numOfComparisons}

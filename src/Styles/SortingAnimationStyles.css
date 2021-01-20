@@ -1,31 +1,17 @@
-.block {
-  width: 4px;
-  margin: 0 1px;
-  display: inline-block;
-  background-color: #282c34;
+/* block array styles */
+
+.block { /* single block */
+    width: 4px;
+    margin: 0 1px;
+    display: inline-block;
+    background-color: #282c34;
 }
 
-.container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  /*justify-content: center;*/
-  align-items: center; 
-}
-
-.App {
-  text-align: center;
-}
-  
-.App-header {
-  background-color: #282c34;
-  /*min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);*/
-  color: white;
+.container { /* block container */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center; 
 }
