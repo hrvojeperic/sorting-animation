@@ -1,3 +1,5 @@
+**See complete project at https://hrvojeperic.github.io/sorting-animation/**
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
