@@ -32,6 +32,7 @@ class SortingAnimation extends Component {
 
     // create new array when component mounted
     componentDidMount = () => {
+        document.title = "Sorting Animation"; // set tab title
         this.newArrayHandler();
     }
 

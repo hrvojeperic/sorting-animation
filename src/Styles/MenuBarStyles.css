@@ -37,3 +37,17 @@ button:hover:enabled{ /* hover buttons */
     font-weight: bold;
     padding: 0 45px;
 }
+
+a { /* github link */
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 11px 15px;
+    color: white;
+    text-decoration: none;
+}
+
+a:hover { /* hover github link */
+    color: gray;
+    text-decoration: underline;
+}

@@ -5,6 +5,7 @@ import '../Styles/MenuBarStyles.css';
 const MenuBarComponent = (props) => {
     return (
         <div className='Menu'>
+            <a href={'https://github.com/hrvojeperic'}>github.com/hrvojeperic</a>
             <button disabled={props.isNewButtonDisable} onClick={props.new}>New Array</button>
             <button disabled={props.isSortButtonDisable} onClick={props.bubble} style={{backgroundColor: props.bubbleButtonSelectedColor}}>Bubble Sort</button>
             <button disabled={props.isSortButtonDisable} onClick={props.insertion} style={{backgroundColor: props.insertionButtonSelectedColor}}>Insertion Sort</button>
