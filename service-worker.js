@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/sorting-animation/precache-manifest.ed580211feac7c5a10078b0969b1f043.js"
+  "/sorting-animation/precache-manifest.683b3ab19e2b1bd207cec8d0405f94f1.js"
 );
 
 self.addEventListener('message', (event) => {
