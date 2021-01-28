@@ -39,7 +39,6 @@ button:hover:enabled{ /* hover buttons */
 }
 
 a { /* github link */
-    position: absolute;
     top: 0px;
     right: 0px;
     padding: 11px 15px;

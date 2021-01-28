@@ -16,7 +16,7 @@ class SortingAnimation extends Component {
         animationArray: [],
         arraySize: 150,
         minElementSize: 10,
-        maxElementSize: 500,
+        maxElementSize: 450,
         animationSpeed: 1,
         isNewButtonDisable: false,
         isSortButtonDisable: false,

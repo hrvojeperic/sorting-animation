@@ -5,13 +5,14 @@ import '../Styles/MenuBarStyles.css';
 const MenuBarComponent = (props) => {
     return (
         <div className='Menu'>
-            <a href={'https://github.com/hrvojeperic'}>github.com/hrvojeperic</a>
+            <div><a href={'https://github.com/hrvojeperic'}>github.com/hrvojeperic</a></div>
             <button disabled={props.isNewButtonDisable} onClick={props.new}>New Array</button>
             <button disabled={props.isSortButtonDisable} onClick={props.bubble} style={{backgroundColor: props.bubbleButtonSelectedColor}}>Bubble Sort</button>
             <button disabled={props.isSortButtonDisable} onClick={props.insertion} style={{backgroundColor: props.insertionButtonSelectedColor}}>Insertion Sort</button>
             <button disabled={props.isSortButtonDisable} onClick={props.selection} style={{backgroundColor: props.selectionButtonSelectedColor}}>Selection Sort</button>
             <button disabled={props.isSortButtonDisable} onClick={props.merge} style={{backgroundColor: props.mergeButtonSelectedColor}}>Merge Sort</button>
             <button disabled={props.isSortButtonDisable} onClick={props.quick} style={{backgroundColor: props.quickButtonSelectedColor}}>Quick Sort</button>
+            
             <div>
                 <table>
                     <colgroup>
