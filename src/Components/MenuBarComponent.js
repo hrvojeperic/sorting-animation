@@ -12,7 +12,6 @@ const MenuBarComponent = (props) => {
             <button disabled={props.isSortButtonDisable} onClick={props.selection} style={{backgroundColor: props.selectionButtonSelectedColor}}>Selection Sort</button>
             <button disabled={props.isSortButtonDisable} onClick={props.merge} style={{backgroundColor: props.mergeButtonSelectedColor}}>Merge Sort</button>
             <button disabled={props.isSortButtonDisable} onClick={props.quick} style={{backgroundColor: props.quickButtonSelectedColor}}>Quick Sort</button>
-            
             <div>
                 <table>
                     <colgroup>
