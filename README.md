@@ -7,3 +7,6 @@ In addition, number of comparisons and swaps are displayed dynamically.
 
 ## Project Details
 Developed using ReactJS.
+
+## Contributors
+Joey Peric
